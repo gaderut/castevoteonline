@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html ng-app="cyberWarApp">
+	<head>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+		<script src="json/ConstiTuencies.json"></script>
+		<script type="text/javascript" src="js/main.js"> </script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<title>User's Profile</title>
+	</head>
+	<body ng-controller="voterCtrl">
+		<section id="home">
+			<div class=" well jumbotron text-center" >
+				<div class="container main text-center">
+					<h1>Elector's Profile</h1><br>
+					<p>View/Edit your profile</p><br>
+					<div class="btn-group">
+						<button id="viewForm" class="btn btn-lg btn-default" ng-click="showVoterRegisterForm()">Edit</button>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="addVoterForm">
+		<modal title="Registration Form">
+			<form class="form" id="form1" >
+				<div class="container">
+					<div class="well">
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6">
+								<input type="text" name="electorfname" ng-model="e.electorfname" id="electorfnameid" ng-model="electorfnameid" required class="form-control nodigits" placeholder="Elector's First Name." required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorfname">
+	 								<strong>Error!</strong> Only uppercase and lowercase letters are allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" name="electormname" ng-model="e.electormname" required id="electormnameid" placeholder="Elector's Middle Name." required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errormname">
+	 								<strong>Error!</strong> Only uppercase and lowercase letters are allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6">
+								<input type="text" class="form-control" required name="electorlname" ng-model="e.electorlname" id="electorlnameid" placeholder="Elector's Last Name." required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorlname">
+	 								<strong>Error!</strong> Only uppercase and lowercase letters are allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-2"><label><font color = "gray" size="3%">Gender:</font></label></div>
+							<div class="col-lg-4">
+								<div class ="row">
+									<div class="col-lg-2"><label>Male:</label></div><div class="col-lg-2"><input required type="radio" class="radio" name="electorsex" ng-model="e.electorsex" id="electorsexmale"></div>
+									<div class="col-lg-2"><label>Female:</label></div><div class="col-lg-2"><input required type="radio" class = "radio" name="electorsex" ng-model="e.electorsex" id="electorsexfemale"></div>
+									<div class="col-lg-2"><label>Other:</label></div><div class="col-lg-2"><input required type="radio" class="radio" name="electorsex" ng-model="e.electorsex" id="electorsexother"></div>
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row ">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" class="form-control date datepicker1" required name="electorbdate" ng-model="e.electorbdate" id="electorbdateid" placeholder="Elector's  Birth Date." required/>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" class="form-control" required name="electorbirthplace" ng-model="e.electorbirthplace" id="electorbirthplaceid" placeholder="Elector's Birth Place." required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorelectorbirthplace">
+	 								<strong>Error!</strong> Only uppercase,lowercase letters and numbers are allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select class="form-control" required name="electorstate" onchange="setDistrict();" ng-model="e.electorstate" id="electorstateid" required>
+									<option value="">Elector's Birth State.</option>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select class="form-control" required name="electordistrict" ng-model="e.electordistrict" onchange="setSubDistrict();" id="electordistrictid"  required>
+									<option value="">Elector's Birth District.</option>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select  class="form-control" required name="electorsubdistrict" ng-model="e.electorsubdistrict" id="electorsubdistrictid"  required>
+									<option value="">Elector's Birth Town/Village.</option>
+								</select>
+								</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" class="form-control" required name="electorrfname" ng-model="e.electorrfname" id="electorrfnameid" placeholder="Father's/Mother's/Husband's First Name" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorrfname">
+	 								<strong>Error!</strong> Only uppercase and lowercase letters are allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" class="form-control" required name="electorrmname" ng-model="e.electorrmname" id="electorrmnameid" placeholder="Father's/Mother's/Husband's Middle Name" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorrmname">
+	 								<strong>Error!</strong> Only uppercase and lowercase letters are allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" class="form-control" required name="electorrlname" ng-model="e.electorrlname" id="electorrlnameid" placeholder="Father's/Mother's/Husband's Last Name" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorrlname">
+	 								<strong>Error!</strong> Only uppercase and lowercase letters are allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select class="form-control" required name="electorrelation" ng-model="e.electorrelation" id="electorrelationid" required>
+									<option value="">Relation for above</option>
+									<option value="father">Father</option>
+									<option value="mother">Mother</option>
+									<option value="husband">Husband</option>
+									<option value="wife">Wife</option>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="number" class="form-control" required name="electoruid" ng-model="e.electoruid" id="electoruidid" placeholder="AADHAR Number" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="erroraadhar">
+	 								<strong>Error!</strong> Only twelve digit number allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="number" class="form-control" required name="electorphone" ng-model="e.electorphone" id="electorphoneid" placeholder="Phone" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorphone">
+	 								<strong>Error!</strong> Only ten digit number allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" class="form-control" required name="electoremail" ng-model="e.electoremail" id="electoremailid" placeholder="Email ID" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="erroremail">
+	 								<strong>Error!</strong> Enter a valid email ID. (Ex.mailme@mail.domainname)
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" class="form-control" required name="electorpermenantaddress" ng-model="e.electorpermenantaddress" id="electorpermenantaddressid" placeholder="Permanent Address" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorspmtadd">
+	 								<strong>Error!</strong> Only uppercase,lowercase letters and numbers are allowed.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select class="form-control" required name="prmtAddElectorstate" ng-model="e.prmtAddElectorstate" onchange="setpmtDistrict();" id="prmtAddElectorstateid" required>
+									<option value="">State</option>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select class="form-control" required name="prmtAddElectordistrict" ng-model="e.prmtAddElectordistrict" onchange="setpmtSubDistrict();" id="prmtAddElectordistrictid" required>
+									<option value="">District</option>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select class="form-control" name="prmtAddElectorsubdistrict" ng-model="e.prmtAddElectorsubdistrict" id="prmtAddElectorsubdistrictid" required>
+									<option value="">Town/Village</option>
+								</select>
+								</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="number" required class="form-control" name="electorpincode" ng-model="e.electorpincode" id="electorpincodeid" placeholder="Pincode" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorpincode">
+	 								<strong>Error!</strong> Enter six digit correct pincode.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" required class="form-control" name="absentreason" ng-model="e.absentreason" id="absentreasonid" placeholder="Reason of being absent from the place of ordinary residence" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorabsentreason">
+	 								<strong>Error!</strong> Length must be between minimum 10 to maximum 30 characters.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" required class="form-control" name="absentdescription" ng-model="e.absentdescription" id="absentdescriptionid" placeholder="Description for above" required/>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" required class="form-control date datepicker1" name="awaydate" ng-model="e.awaydate" id="awaydateid" placeholder="Date from which you are away from ordinary residence" required/>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="text" required class="form-control" name="electorcurrentaddress" ng-model="e.electorcurrentaddress" id="electorcurrentaddressid" placeholder="Current Address" required/>
+									<br>
+									<div class="alert hidden alert-danger" id="errorcurrentadd">
+		 								<strong>Error!</strong> Only uppercase,lowercase letters and numbers are allowed.
+									</div>
+							</div>
+							
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select class="form-control" required name="currAddElectorstate" ng-model="e.currAddElectorstate" onchange="setcurrDistrict();" id="currAddElectorstateid" required>
+									<option value="">State</option>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select class="form-control" required name="currAddElectordistrict" ng-model="e.currAddElectordistrict" onchange="setcurrSubDistrict();" id="currAddElectordistrictid" required>
+									<option value="">District</option>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<select class="form-control" name="currAddElectorsubdistrict" ng-model="e.currAddElectorsubdistrict" id="currAddElectorsubdistrictid" required>
+									<option value="">Town/Village</option>
+								</select>
+								</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-6 ">
+								<input type="number" required class="form-control" name="currelectorpincode" ng-model="e.currelectorpincode" id="currelectorpincodeid" placeholder="Pincode" required/>
+								<br>
+								<div class="alert hidden alert-danger" id="errorcurrpincode">
+	 								<strong>Error!</strong> Enter six digit correct pincode.
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class = "row">
+							<div class="col-lg-5"></div>
+							<div class="col-lg-4">
+								<div class="btn-group">					
+									<button id="btnAddUser" type="button" ng-click="validate()" class="btn btn-lg btn-info">Save</button>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</form>
+			</modal>
+		</section>
+	</body>
+</html> 

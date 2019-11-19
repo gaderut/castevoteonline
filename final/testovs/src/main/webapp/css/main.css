@@ -1,0 +1,85 @@
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+body {
+	padding-top: 40px;
+	height: 100%;
+}
+
+.main{
+	height: 100%;
+}
+
+.well{
+	background-color: rgb(22, 105, 173);
+}
+/* #candidatedropdownid{
+	 opacity:0.4;
+} */
+
+.carousel,.item,.active{	
+   height:100%;
+}
+
+.carousel-inner{
+    height:100%;
+}
+
+.carousel{
+	padding-top: 0px;
+}
+
+.page-section {
+	width: 100%;
+	min-height: 800px;
+	padding: 50px 0;
+	border-bottom: 10px solid #fff;
+}
+.carousel-caption{
+	top:0;
+	bottom:auto;
+}
+.carousel-caption h3{
+	font-size: 350%;
+}
+
+/*
+	To Disable scrolling of the entire page
+*/
+.disabled-scrollbar {
+    position: fixed;
+   /*  right: 0;
+    top: 0;
+    width: 24px;
+    height: 100%;
+    background-color: white;
+    opacity: 0.6; */
+}
+
+.loginModal {
+    position:absolute;
+    top:160px;
+    left:100px;
+    }
+
+.candidateListModal{
+	position:absolute;
+    top:10px;
+    left:10px;
+}    

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/dropdowns-enhancement.js"></script>
+		<script src="../js/angular.min.js"></script>
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+		<link rel="stylesheet" href="../css/dropdowns-enhancement.css">
+<style>
+/* The Image Box */
+ div.img {
+    border: 1px solid #ccc;
+}
+
+div.img:hover {
+    border: 1px solid #777;
+}
+/*
+div.img img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+*/
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+/*  {
+    box-sizing: border-box;
+}  
+ */
+
+.responsive {
+   padding: 0 100px 50px 0; 
+    float: left;
+    
+}
+ 
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0.1)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Responsive Columns */
+@media only screen and (max-width: 700px){
+     .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    } 
+    .modal-content {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .responsive {
+        width: 100%;
+    } 
+}
+
+/* Clear Floats */
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.para {
+    right: 35px;
+    color: #000000;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+body {
+    background-image: url("images/bg-6-full.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 2cm;
+}
+.c1{
+margin-left: 4cm;
+}
+</style>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+    modal.style.display = "none";
+}
+
+// Get all images and insert the clicked image inside the modal
+// Get the content of the image description and insert it inside the modal image caption
+var images = document.getElementsByTagName('img');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+var i;
+for (i = 0; i < images.length; i++) {
+   images[i].onclick = function(){
+       modal.style.display = "block";
+       modalImg.src = this.src;
+       modalImg.alt = this.alt;
+       captionText.innerHTML = this.nextElementSibling.innerHTML;
+   }
+}
+</script>
+</head>
+<body ng-controller="bodyCtrl" id="body" class="disabled-scrollbar">
+	
+<!----------------------------------------------------------------------------------------------------
+	Navigation Bar
+  ---------------------------------------------------------------------------------------------------->	
+		<nav ng-controller="navBarCtrl" class="navbar navbar-inverse navbar-fixed-top" id="navbar1">
+			<div class="container">
+				<div class="navbar-header row">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#optionbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="../index.jsp" class="navbar-brand">CyberVoting</a>
+				</div>
+			</div>
+		</nav>
+
+
+
+<h1 style="text-align:center;margin-top:100px"><b>Image Gallery</b></h1>
+<br><br>
+<div class="responsive">
+  <div class="img">
+      <img src="../assets/Gallery/cec.jpg" alt="Dr. Nasim Zaidi Chief Election Commissioner" width="300" height="300">
+    <div class="desc">Dr. Nasim Zaidi<br>Chief Election Commissioner  </div>
+  </div>
+</div>
+
+
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/ec.jpg" alt="Sh. A K Joti Election Commissioner" width="300" height="300">
+    <div class="desc">Sh. A K Joti<br>Election Commissioner </div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/ec2.jpg" alt="Sh. Om Prakash Rawat Election Commissioner" width="300" height="300">
+    <div class="desc">Sh. Om Prakash Rawat<br>Election Commissioner</div><br>
+  </div>
+</div>
+<div class="c1">
+<div class="para">
+<p>Photo Gallery-Former Chief Election Commissioners</p>
+</div>
+
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/01_SukumarSen.jpg" alt="01_Sukumar Sen" width="150" height="150">
+    <div class="desc">1. Sukumar Sen<br>21 March 1950<br>to<br>19 December 1958</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/02_KVK_Sundram.jpg" alt="02_KVK_Sundram" width="150" height="150">
+    <div class="desc">2. KVK Sundaram<br>20 December 1958<br>to<br>30 September 1967</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/03_SP_SenVerma.jpg" alt="03_SP_SenVerma" width="150" height="150">
+    <div class="desc">3. SP Sen Verma<br>1 October 1967<br>to<br>30 September 1972</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/04_Nagendra_Singh.jpg" alt="04_Nagendra_Singh" width="150" height="150">
+    <div class="desc">4. Dr Nagendra <br>Singh<br>1 October 1972<br>to<br>6 February 1973</div>
+  </div>
+</div><br style="clear:left;" />
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/05_T_swaminathan.jpg" alt="05_T_swaminathan" width="150" height="150">
+    <div class="desc">5. T Swaminathan<br>7 February 1973<br>to<br>17 June 1977</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/06_SL_Shakdhar.jpg" alt="06_SL_Shakdhar" width="150" height="150">
+    <div class="desc">6.SL Shakdhar<br>18 June 1977<br>to<br>17 June 1982</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/07_RK_Trivedi.jpg" alt="07_RK_Trivedi" width="150" height="150">
+    <div class="desc">7. RK Trivedi<br>18 June 1982<br>to<br>31 December 1985</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/08_RVS_PeriShastri.jpg" alt="08_RVS_PeriShastri" width="150" height="150">
+    <div class="desc">8. RVS Peri Sastri<br>1 January 1986<br>to<br>25 November 1990</div>
+  </div>
+</div><br style="clear:left;" />
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/09_VS_RamaDevi.jpg" alt="09_VS_RamaDevi" width="150" height="150">
+    <div class="desc">9.Smt VS Ramadevi<br>26 November 1990<br>to<br>11 December 1990</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/10_TN_seshan.jpg" alt="10_TN_seshan" width="150" height="150">
+    <div class="desc">10. TN Seshan<br>12 December 1990<br>to<br>11 December 1996</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/11_MS_Gill.jpg" alt="11_MS_Gill" width="150" height="150">
+    <div class="desc">11. Dr. MS Gill<br> 12 December 1996<br>to<br>13 June 2001</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/12_JM_Lyngdoh.jpg" alt="12_JM_Lyngdoh" width="150" height="150">
+    <div class="desc">12. Mr. J.M.<br> Lyngdoh<br>14 June 2001<br>to<br>7 Feb 2004</div>
+  </div>
+</div><br style="clear:left;" />
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/13_TSKMurthy.gif" alt="13_TSKMurthy" width="150" height="150">
+    <div class="desc">13. Mr. T.S. Krishna<br> Murthy<br>8 Feb 2004<br>to<br>15 May 2005</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/14_BBandon_sm.jpg" alt="14_BBandon_sm" width="150" height="150">
+    <div class="desc">14. Mr. B.B.<br> Tandon<br>16 May 2005<br>to<br>29 June 2006</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/15_GSwami.jpg" alt="15_GSwami" width="150" height="150">
+    <div class="desc">15. Mr. N. <br>Gopalaswami<br>30 June 2006<br>to<br>20 April 2009</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/16_Navin-Chawla.jpg" alt="16_Navin-Chawla" width="150" height="150">
+    <div class="desc">16.  Navin B.<br> Chawla<br>21 April 2009<br>to<br>29 July 2010</div>
+  </div>
+</div><br style="clear:left;" />
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/17_DrSYQuraishi.jpg" alt="17_DrSYQuraishi" width="150" height="150">
+    <div class="desc">17. Dr. S.Y.Quraishi<br> 30 July 2010<br>to<br>10 June 2012</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/18CECVSSampath.jpg" alt="18CECVSSampath" width="150" height="150">
+    <div class="desc">18. Shri V.S.Sampath<br>11 June 2012<br>to<br>15 Jan 2015</div>
+  </div>
+</div>
+<div class="responsive">
+  <div class="img">
+    <img src="../assets/Gallery/19_H.S. Brahma.jpg" alt="19_H.S. Brahma" width="150" height="150">
+    <div class="desc">19. Shri. H.S.<br>Brahma<br>16 Jan 2015<br>to<br> 18 April 2015</div>
+  </div>
+</div>
+</div>
+<div class="clearfix"></div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">×</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+
+
+</body>
+</html>

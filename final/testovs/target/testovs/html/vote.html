@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+  	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script src= "js/angular.min.js"></script>
+	<!-- <script type="text/javascript" src="js/vote.js"></script> -->
+	<!-- <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script> -->
+	
+<title>Vote</title>
+</head>
+
+<script>
+var app = angular.module("app", []);
+
+app.controller('voteCtrl', function($scope) {
+
+  $scope.candidateList = [{
+	  name : "pranay",
+	  party : "BJP",
+	  electionType : "central",
+	  contestState : "maharashtra",
+	  contestDistrict : "aurangabad",
+	  contestSubdistrict : "central",
+	  constituency : "aaa"
+  },
+  {
+	  name : "Girish",
+	  party : "Congress",
+	  electionType : "central",
+	  contestState : "maharashtra",
+	  contestDistrict : "aurangabad",
+	  contestSubdistrict : "central",
+	  constituency : "aaa"
+  },
+  {
+	  name : "Raj",
+	  party : "MNS",
+	  electionType : "central",
+	  contestState : "maharashtra",
+	  contestDistrict : "aurangabad",
+	  contestSubdistrict : "central",
+	  constituency : "aaa"
+  },
+  {
+	  name : "Tejas", 
+	  party : "Congress",
+	  electionType : "legislative",
+	  contestState : "maharashtra",
+	  contestDistrict : "jalgaon",
+	  contestSubdistrict : "west",
+	  constituency : "bbb"		 
+  },
+  {
+	  name : "Sheetal", 
+	  party : "BJP",
+	  electionType : "legislative",
+	  contestState : "maharashtra",
+	  contestDistrict : "jalgaon",
+	  contestSubdistrict : "west",
+	  constituency : "bbb"		 
+  },
+  {
+	  name : "Gaddu",
+	  party : "RJD",
+	  electionType : "gram panchayat",
+	  contestState : "maharashtra",
+	  contestDistrict : "mumbai",
+	  contestSubdistrict : "east",
+	  constituency : "ccc"
+  }, {
+	  name : "Surbhi", 
+	  party : "AAP",
+	  electionType : "central",
+	  contestState : "maharashtra",
+	  contestDistrict : "amravati",
+	  contestSubdistrict : "south",
+	  constituency : "ddd"
+	  }];
+  
+  $scope.electionList = [{
+	  electionType : "central"
+  }, {
+	  electionType : "legislative"
+  }, {
+	  electionType : "gram panchayat"
+  }];
+
+  $scope.getCandidates = function(){
+	  $("#candDetails").addClass('hidden');
+	 $scope.selectedElection = this.e.electionType;
+	 $scope.electorState = "maharashtra";
+	 $scope.electorDistrict = "aurangabad";
+	 $scope.electorSubdistrict = "central";
+	 $scope.tempList = [];
+	  for(var i=0; i<$scope.candidateList.length; i++){
+		 var c = $scope.candidateList[i];
+		 if(c.electionType == $scope.selectedElection && c.contestState == $scope.electorState && c.contestDistrict == $scope.electorDistrict && c.contestSubdistrict == $scope.electorSubdistrict){
+			 $scope.tempList.push(c);
+		 }
+	 }
+	 if($scope.tempList[0] != null){
+		 $("#candDetails").removeClass('hidden'); 
+	 }
+  }
+  
+});
+</script>
+
+<body ng-controller="voteCtrl">
+<div align="center" class="table-responsive">
+  <h2>Ready to vote ?</h2>
+  
+  <table id="elections" style="width:50%;" class="table table-striped table-bordered   table-hover">
+    <thead>
+      <tr>
+        <th>Election Type</th>
+      </tr>
+      <tbody>
+          <tr ng-repeat="e in electionList" ng-click="getCandidates()">
+          <td>{{e.electionType}}</td>
+        </tr>
+      </tbody>
+  </table>
+  </div>
+  <!-- <table id="candidateDetails" class="table table-striped">
+    <thead>
+      <tr>
+      	<th></th>
+        <th>Party Name</th>
+        <th>Candidate name</th>
+      </tr>
+      <tbody>
+        <tr ng-repeat="c in candidateList">
+          <td><input type="radio" ng-model="c.checked"></td>
+          <td>{{c.party}}</td>
+          <td>{{c.name}}</td>
+        </tr>
+      </tbody>
+  </table> -->
+    <div align="center" class="table-responsive">
+    <table id="candDetails" style="width:50%;" class="table table-striped table-bordered   table-hover hidden">
+    <thead>
+      <tr>
+      	<th></th>
+        <th>Party Name</th>
+        <th>Candidate name</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="c in tempList">
+          <td><input type="radio" ng-model="c.checked" checked="true"></td>
+          <td>{{c.party}}</td>
+          <td>{{c.name}}</td>
+        </tr>
+      </tbody>
+  </table> 
+
+  <input type="submit" value="Vote">
+</div>  
+</body>
+
+</html>

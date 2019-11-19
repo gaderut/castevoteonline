@@ -1,0 +1,13 @@
+com\ovs\TestController.class
+com\ovs\fingerPrint\node.class
+com\ovs\services\LoginService.class
+com\ovs\dao\DataRepository.class
+com\ovs\fingerPrint\FR3.class
+com\ovs\model\Vote.class
+com\ovs\fingerPrint\InsertImage.class
+com\ovs\fingerPrint\ImageTest.class
+com\ovs\model\Voter.class
+com\ovs\model\Candidate.class
+com\ovs\model\FingerPrint.class
+com\ovs\VoterController.class
+com\ovs\services\DetailsHandling.class
